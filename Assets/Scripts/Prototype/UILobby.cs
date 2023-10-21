@@ -165,10 +165,8 @@ namespace ProgrammingTask
 
         private void UpdateTeamButton(Lobby lobby)
         {
-            Debug.Log("HeartBeat");
             foreach (Player player in lobby.Players)
             {
-                // Debug.Log($"{player.Id} {player.Data["TeamColor"].Value} {player.Data["OccupiedButton"].Value}");
                 UILobbyTeam.Instance.UpdateCurrentOccupiedButtons(lobby.Players);
             }
         }
@@ -195,7 +193,6 @@ namespace ProgrammingTask
             Lobby lobby =
                 await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers,options);
             
-            Debug.Log($"Create Lobby!: {lobby.Name} with {lobby.MaxPlayers} players");
             _hostLobby = lobby;
             _joinedLobby = lobby;
 
@@ -225,7 +222,6 @@ namespace ProgrammingTask
         {
             try
             {
-                Debug.Log("Clicked Quick Join");
                 QuickJoinLobbyOptions quickJoinLobbyOptions = new QuickJoinLobbyOptions
                 {
                     Player = GetPlayer()
@@ -338,8 +334,6 @@ namespace ProgrammingTask
                 });
                 
                 _joinedLobby = lobby;
-                
-                Debug.Log($"[UILobby] Updating occupy button: {indexOccupied} is occupied");
             }
             catch (Exception e)
             {
@@ -405,8 +399,6 @@ namespace ProgrammingTask
             {
                 try
                 {
-                    Debug.Log("Start Game");
-
                     string relayCode = await CreateRelay();
                     
                     Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(_joinedLobby.Id, new UpdateLobbyOptions

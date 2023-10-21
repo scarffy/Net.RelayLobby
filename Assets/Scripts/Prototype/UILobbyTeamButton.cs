@@ -49,7 +49,6 @@ namespace ProgrammingTask
             {
                 //! Handle success event
                 _isOccupied = true;
-                Debug.Log($"Button {_buttonIdex} is occupied");
                 //_teamButtonText.SetText("Occupied");
                 UILobbyTeam.Instance.SetCurrentOccupiedButton(_buttonIdex);
             }
@@ -57,7 +56,6 @@ namespace ProgrammingTask
             {
                 //! Handle fail event
                 _isOccupied = false;
-                Debug.Log("Button can't be occupied");
                 _teamButtonText.SetText(JOIN_TEAM);
             }
         }

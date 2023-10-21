@@ -56,10 +56,8 @@ namespace  ProgrammingTask
         public void UpdateCurrentOccupiedButtons(List<Unity.Services.Lobbies.Models.Player> playerList)
         {
             if (playerList.Count <= 0)
-            {
-                Debug.Log("No player in the lobby");
                 return;
-            }
+
             
             foreach (Unity.Services.Lobbies.Models.Player player in playerList)
             {

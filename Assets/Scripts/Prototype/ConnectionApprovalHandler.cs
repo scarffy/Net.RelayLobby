@@ -18,7 +18,6 @@ namespace ProgrammingTask
         private void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request,
             NetworkManager.ConnectionApprovalResponse response)
         {
-            Debug.Log("Connect Approval");
             response.Approved = true;
             response.CreatePlayerObject = true;
             response.PlayerPrefabHash = null;
