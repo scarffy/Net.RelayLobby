@@ -80,7 +80,13 @@ namespace ProgrammingTask
 
         public void SetOccupy(bool bIsOccupied, string playerName)
         {
-            
+            _isOccupied = bIsOccupied;
+            if (_isOccupied)
+            {
+                _teamButtonText.SetText(playerName);
+            }
+            else
+                _teamButtonText.SetText("Join Team");
         }
 
         public int ButtonIndex => _buttonIdex;

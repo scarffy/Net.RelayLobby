@@ -12,6 +12,7 @@ using Unity.Services.Lobbies.Models;
 using Unity.Services.Relay;
 using Unity.Services.Relay.Models;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace ProgrammingTask
@@ -54,7 +55,7 @@ namespace ProgrammingTask
 
             AuthenticationService.Instance.SignedIn += () =>
             {
-                Debug.Log($"Signed in {AuthenticationService.Instance.PlayerId}");
+                Debug.Log($"Signed in {AuthenticationService.Instance.PlayerId} {_playerName}");
             };
             
             //! User sign in as anon
@@ -420,12 +421,20 @@ namespace ProgrammingTask
 
                     _joinedLobby = lobby;
                     SetLobbyMode(LobbyMode.game);
+                    ChangeScene();
                 }
                 catch (LobbyServiceException e)
                 {
                     Debug.LogWarning(e);
                 }
             }
+        }
+
+        private void ChangeScene()
+        {
+            var status = NetworkManager.Singleton.SceneManager.LoadScene("Game", LoadSceneMode.Single);
+            if(status != SceneEventProgressStatus.Started)
+                Debug.LogWarning("Scene failed to load");
         }
         
         public enum LobbyMode

@@ -84,7 +84,7 @@ namespace  ProgrammingTask
                         {
                             if (e.eTeamColour == eTeamColor)
                             {
-                                e.SetOccupy(true);
+                                e.SetOccupy(true, _player.Data["PlayerName"].Value);
                             }
                         }
                             

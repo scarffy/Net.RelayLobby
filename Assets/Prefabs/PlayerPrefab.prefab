@@ -505,6 +505,7 @@ MonoBehaviour:
   _playerSpeed: 2
   _jumpHeight: 1
   _gravityValue: -9.81
+  _rotationSpeed: 4
   _movementControl: {fileID: -5604531313991385381, guid: b29defeb6860d88498621ad533412a1d, type: 3}
   _jumpControl: {fileID: 1203005193641693814, guid: b29defeb6860d88498621ad533412a1d, type: 3}
 --- !u!114 &790091964727094867
