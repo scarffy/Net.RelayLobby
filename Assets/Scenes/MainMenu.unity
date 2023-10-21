@@ -2565,6 +2565,7 @@ MonoBehaviour:
   _playerName: 
   _isHost: 0
   _joinRelayCode: 
+  _approvalHandler: {fileID: 2097326947}
 --- !u!4 &1104767964
 Transform:
   m_ObjectHideFlags: 0

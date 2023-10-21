@@ -40,6 +40,8 @@ namespace ProgrammingTask
         [SerializeField] private bool _isHost = false;
 
         [Space] [SerializeField] private string _joinRelayCode = "";
+
+        [Space] [SerializeField] private ConnectionApprovalHandler _approvalHandler;
         
         private async void Start()
         {
@@ -159,6 +161,7 @@ namespace ProgrammingTask
                     
                     //! Update button lobby
                     UpdateTeamButton(lobby);
+                    UpdateTeamList(lobby);
                 }
             }
         }
@@ -171,13 +174,58 @@ namespace ProgrammingTask
             }
         }
 
+        private void UpdateTeamList(Lobby lobby)
+        {
+            if (_approvalHandler.playerDatas.Count <= 0)
+            {
+                Debug.Log("PlayerData Dict is empty");
+                return;
+            }
+            else
+            {
+                foreach (var player in lobby.Players)
+                {
+                    if (!_approvalHandler.playerDatas.ContainsKey(player.Data["PlayerName"].Value))
+                    {
+                        PlayerData data = new PlayerData();
+                        data.buttonChosen = int.Parse(player.Data["OccupiedButton"].Value);
+                        data.ETeamColor = (ETeamColor)Enum.Parse(typeof(ETeamColor),player.Data["TeamColor"].Value);
+                        
+                        _approvalHandler.playerDatas.TryAdd(player.Data["PlayerName"].Value, data);
+                    }
+                    else
+                    {
+                        PlayerData data = new PlayerData();
+                        data.buttonChosen = int.Parse(player.Data["OccupiedButton"].Value);
+                        data.ETeamColor = (ETeamColor)Enum.Parse(typeof(ETeamColor),player.Data["TeamColor"].Value);
+                        data.playerName = player.Data["PlayerName"].Value;
+                        data.playerLobbyId = player.Id;
+
+                        _approvalHandler.playerDatas[player.Data["PlayerName"].Value].playerName = data.playerName;
+                        _approvalHandler.playerDatas[player.Data["PlayerName"].Value].ETeamColor = data.ETeamColor;
+                        _approvalHandler.playerDatas[player.Data["PlayerName"].Value].buttonChosen = data.buttonChosen;
+                        _approvalHandler.playerDatas[player.Data["PlayerName"].Value].playerLobbyId = data.playerLobbyId;
+      
+                    }
+                }
+                
+                foreach (var playerData in _approvalHandler.playerDatas)
+                {
+                    Debug.Log($"[PlayerData List Update]: Key:{playerData.Key} Name:{playerData.Value.playerName}" +
+                              $" LobbyId:{playerData.Value.playerLobbyId} TeamColor:{playerData.Value.ETeamColor}" +
+                              $" ButtonChose:{playerData.Value.buttonChosen} ClientId:{playerData.Value.clientId}");
+                }
+            }
+            
+        }
+
         private async void CreateLobby()
         {
             string lobbyName = "MyLobby";
             int maxPlayers = 10;
             
             Player player = GetPlayer();
-
+            
             CreateLobbyOptions options = new CreateLobbyOptions
             {
                 Player = player,
@@ -199,6 +247,8 @@ namespace ProgrammingTask
             _isHost = true;
             
             SetLobbyMode(LobbyMode.lobby);
+            
+            AddPlayerToDictionary(_joinedLobby);
         }
 
         private async void ListLobbies()
@@ -226,6 +276,9 @@ namespace ProgrammingTask
                 {
                     Player = GetPlayer()
                 };
+                
+                Player player = GetPlayer();
+                
                 Lobby joinedLobby = await Lobbies.Instance.QuickJoinLobbyAsync(quickJoinLobbyOptions);
                 
                 _joinedLobby = joinedLobby;
@@ -234,13 +287,29 @@ namespace ProgrammingTask
                 
                 PrintPlayers(joinedLobby);
 
+                Debug.Log("Someone joined lobby");
+                if (!_approvalHandler.playerDatas.ContainsKey(_playerName))
+                {
+                    AddPlayerToDictionary(joinedLobby);
+                }
+                else
+                {
+                    Debug.Log("Failed to add player to dictionary. Data already existed");
+                }
+
                 _hostStartGameButton.gameObject.SetActive(false);
+                
             }
             catch (LobbyServiceException e)
             {
                 Debug.LogWarning(e);
             }
         }
+        
+        /// <summary>
+        /// Set Player default value in lobby
+        /// </summary>
+        /// <returns></returns>
         private Player GetPlayer()
         {
             return new Player {
@@ -258,12 +327,33 @@ namespace ProgrammingTask
                 }
             };
         }
-        
+
+        private void AddPlayerToDictionary(Lobby lobby)
+        {
+            foreach (Player player in lobby.Players)
+            {
+                if (_approvalHandler.playerDatas.TryGetValue(player.Data["PlayerName"].Value, out var data))
+                {
+                    data.ETeamColor = (ETeamColor)Enum.Parse(typeof(ETeamColor),player.Data["TeamColor"].Value);
+                    data.buttonChosen = int.Parse(player.Data["OccupiedButton"].Value);
+                    data.playerName = player.Data["PlayerName"].Value;
+                    data.playerLobbyId = player.Id;
+                }
+            }
+        }
+
         private void PrintPlayers(Lobby lobby)
         {
             foreach (Player player in lobby.Players)
             {
                 Debug.Log($"{player.Id} {player.Data["PlayerName"].Value} {player.Data["TeamColor"].Value} {player.Data["OccupiedButton"].Value}");
+            }
+
+            foreach (var playerData in _approvalHandler.playerDatas)
+            {
+                Debug.Log($"[PlayerData Print]: Key:{playerData.Key} Name:{playerData.Value.playerName}" +
+                          $" LobbyId:{playerData.Value.playerLobbyId} TeamColor:{playerData.Value.ETeamColor}" +
+                          $" ButtonChose:{playerData.Value.buttonChosen} ClientId:{playerData.Value.clientId}");
             }
         }
         
@@ -304,9 +394,16 @@ namespace ProgrammingTask
                             }
                         }
                     });
-                
+
+                if (_approvalHandler.playerDatas.TryGetValue(_playerName, out var data))
+                {
+                    data.ETeamColor = eTeamColor;
+                }
+
                 _joinedLobby = lobby;
-                PrintPlayers(lobby);
+                
+                 PrintPlayers(lobby);
+                 Debug.Log(AuthenticationService.Instance.PlayerId);
                 
             }
             catch (Exception e)
@@ -332,6 +429,11 @@ namespace ProgrammingTask
                         }
                     }
                 });
+                
+                if (_approvalHandler.playerDatas.TryGetValue(_playerName, out var data))
+                {
+                    data.buttonChosen = indexOccupied;
+                }
                 
                 _joinedLobby = lobby;
             }
@@ -428,6 +530,8 @@ namespace ProgrammingTask
             if(status != SceneEventProgressStatus.Started)
                 Debug.LogWarning("Scene failed to load");
         }
+
+        public string GetPlayerName => _playerName;
         
         public enum LobbyMode
         {
