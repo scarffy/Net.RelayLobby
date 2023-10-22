@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 1851149822407940871}
   - component: {fileID: 4750851096787784795}
   - component: {fileID: 6428273895963657742}
-  - component: {fileID: 8450835699394042356}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -111,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 3362254871354595793}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -170,29 +169,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &8450835699394042356
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3362254871354595793}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4120154708066001280
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,11 +269,11 @@ MonoBehaviour:
   _cameraMainTransform: {fileID: 0}
   _controller: {fileID: 5556734908638397373}
   _playerVelocity: {x: 0, y: 0, z: 0}
-  _groundedPlayer: 0
-  _playerSpeed: 2
+  _groundedPlayer: 1
+  _playerSpeed: 5
   _jumpHeight: 1
   _gravityValue: -9.81
-  _rotationSpeed: 4
+  _rotationSpeed: 15
   _movementControl: {fileID: -5604531313991385381, guid: b29defeb6860d88498621ad533412a1d, type: 3}
   _jumpControl: {fileID: 1203005193641693814, guid: b29defeb6860d88498621ad533412a1d, type: 3}
 --- !u!114 &6736908220369974235
@@ -549,11 +525,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8052602925134580395}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1851149822407940871}
   m_Father: {fileID: 4094512609136398485}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

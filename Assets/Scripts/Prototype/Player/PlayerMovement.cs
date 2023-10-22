@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Cinemachine;
 using Unity.Netcode;
 using UnityEngine;
@@ -12,8 +9,7 @@ namespace ProgrammingTask.NetPlayer
     public class PlayerMovement : NetworkBehaviour
     {
         [Header("Camera")] 
-        [SerializeField] private CinemachineVirtualCamera _virtualCamera;
-
+        [SerializeField] private CinemachineFreeLook _virtualCamera;
         [SerializeField] private Transform _cameraMainTransform;
         
         [FormerlySerializedAs("controller")]
@@ -21,10 +17,10 @@ namespace ProgrammingTask.NetPlayer
         [SerializeField] private CharacterController _controller;
         [SerializeField] private Vector3 _playerVelocity;
         [SerializeField] private bool _groundedPlayer;
-        [SerializeField] private float _playerSpeed = 2.0f;
+        [SerializeField] private float _playerSpeed = 5.0f;
         [SerializeField] private float _jumpHeight = 1.0f;
         [SerializeField] private float _gravityValue = -9.81f;
-        [SerializeField] private float _rotationSpeed = 4f;
+        [SerializeField] private float _rotationSpeed = 15f;
         
         [Space] 
         [SerializeField] private InputActionReference _movementControl;
@@ -41,7 +37,7 @@ namespace ProgrammingTask.NetPlayer
 
         public void SetupPlayer()
         {
-            _virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+            _virtualCamera = FindObjectOfType<CinemachineFreeLook>();
             _virtualCamera.Follow = transform;
             _virtualCamera.LookAt = transform;
             _cameraMainTransform = Camera.main.transform;
@@ -68,14 +64,14 @@ namespace ProgrammingTask.NetPlayer
             Vector3 move = new Vector3(movement.x, 0, movement.y);
             move = _cameraMainTransform.forward * move.z + _cameraMainTransform.right * move.x;
             move.y = 0f;
-            
             _controller.Move(move * (Time.deltaTime * _playerSpeed));
             
             if (_jumpControl.action.triggered && _groundedPlayer)
             {
-                _playerVelocity.y += _gravityValue * Time.deltaTime;
+                _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * _gravityValue);
             }
 
+            _playerVelocity.y += _gravityValue * Time.deltaTime;
             _controller.Move(_playerVelocity * Time.deltaTime);
             
             //! Rotation
