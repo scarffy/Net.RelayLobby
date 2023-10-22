@@ -14,7 +14,10 @@ namespace ProgrammingTask
 
         public Dictionary<string, PlayerData> playerDatas = new Dictionary<string, PlayerData>();
 
+        [Space]
         [SerializeField] private string _playerName = "";
+
+        [SerializeField] private int _playerIndex = -1;
         
         private void Start()
         {
@@ -45,6 +48,7 @@ namespace ProgrammingTask
                 if (playerDatas.TryGetValue(_playerName, out PlayerData data))
                 {
                     data.clientId = request.ClientNetworkId;
+                    _playerIndex = data.buttonChosen;
                 }
             }
             
@@ -53,6 +57,8 @@ namespace ProgrammingTask
 
 
         public string GetPlayerName => _playerName;
+        public int GetPlayerIndex => _playerIndex;
+        public int SetPlayerIndex(int index) => _playerIndex = index;
     }
 
     [Serializable]

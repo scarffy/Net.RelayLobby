@@ -49,7 +49,6 @@ namespace ProgrammingTask
             {
                 //! Handle success event
                 _isOccupied = true;
-                //_teamButtonText.SetText("Occupied");
                 UILobbyTeam.Instance.SetCurrentOccupiedButton(_buttonIdex);
             }
             else
@@ -73,7 +72,9 @@ namespace ProgrammingTask
                 _teamButtonText.SetText("Occupied");
             }
             else
+            {
                 _teamButtonText.SetText("Join Team");
+            }
         }
 
         public void SetOccupy(bool bIsOccupied, string playerName)
@@ -84,7 +85,9 @@ namespace ProgrammingTask
                 _teamButtonText.SetText(playerName);
             }
             else
+            {
                 _teamButtonText.SetText("Join Team");
+            }
         }
 
         public int ButtonIndex => _buttonIdex;

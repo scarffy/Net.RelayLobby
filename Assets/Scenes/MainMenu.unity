@@ -5318,6 +5318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerName: 
+  _playerIndex: -1
 --- !u!1 &2146864149
 GameObject:
   m_ObjectHideFlags: 0

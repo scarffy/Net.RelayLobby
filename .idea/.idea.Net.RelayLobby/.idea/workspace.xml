@@ -7,13 +7,12 @@
     <list default="true" id="8bbc986b-ae66-4617-a5b7-4609c215ceda" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Net.RelayLobby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Net.RelayLobby/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/PlayerPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/PlayerPrefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Prototype/ConnectionApprovalHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Prototype/ConnectionApprovalHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Prototype/Player/PlayerHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Prototype/Player/PlayerHandler.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Prototype/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Prototype/Player/PlayerMovement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Prototype/UILobby.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Prototype/UILobby.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Prototype/UILobbyTeam.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Prototype/UILobbyTeam.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Prototype/UILobbyTeamButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Prototype/UILobbyTeamButton.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +109,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1697946045755</updated>
-      <workItem from="1697946047032" duration="6212000" />
+      <workItem from="1697946047032" duration="17779000" />
     </task>
     <servers />
   </component>

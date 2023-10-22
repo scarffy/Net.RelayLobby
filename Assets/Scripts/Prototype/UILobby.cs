@@ -192,6 +192,8 @@ namespace ProgrammingTask
                         data.ETeamColor = (ETeamColor)Enum.Parse(typeof(ETeamColor),player.Data["TeamColor"].Value);
                         
                         _approvalHandler.playerDatas.TryAdd(player.Data["PlayerName"].Value, data);
+                        if (_playerName == player.Data["PlayerName"].Value)
+                            _approvalHandler.SetPlayerIndex(int.Parse(player.Data["OccupiedButton"].Value));
                     }
                     else
                     {
@@ -206,6 +208,8 @@ namespace ProgrammingTask
                         _approvalHandler.playerDatas[player.Data["PlayerName"].Value].buttonChosen = data.buttonChosen;
                         _approvalHandler.playerDatas[player.Data["PlayerName"].Value].playerLobbyId = data.playerLobbyId;
       
+                        if (_playerName == player.Data["PlayerName"].Value)
+                            _approvalHandler.SetPlayerIndex(data.buttonChosen);
                     }
                 }
                 

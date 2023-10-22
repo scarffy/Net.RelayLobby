@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: -1181709811517798099}
   - component: {fileID: 6736908220369974235}
   - component: {fileID: -6536178226763515614}
-  - component: {fileID: -2941177073236529322}
+  - component: {fileID: 122548329639843669}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -328,9 +328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff681150557caa24f97d46b0b5ac1f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerChosenPosition: 0
   _playerMovement: {fileID: -1181709811517798099}
---- !u!114 &-2941177073236529322
+--- !u!114 &122548329639843669
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -339,7 +338,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4120154708066001280}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Script: {fileID: 11500000, guid: c291ac4f358eca643b6a3f8de7be221e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SyncPositionX: 1

@@ -29,27 +29,7 @@ namespace ProgrammingTask.NetPlayer
         [Space] 
         [SerializeField] private InputActionReference _movementControl;
         [SerializeField] private InputActionReference _jumpControl;
-
-        public override void OnNetworkSpawn()
-        {
-            if(!IsOwner) 
-                return;
-
-            _virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
-            _virtualCamera.Follow = transform;
-            _virtualCamera.LookAt = transform;
-            _cameraMainTransform = Camera.main.transform;
-        }
-
-        private void OnEnable()
-        {
-            if(!IsOwner)
-                return;
-            
-            _movementControl.action.Enable();
-            _jumpControl.action.Enable();
-        }
-
+        
         private void OnDisable()
         {
             if (!IsOwner)
@@ -59,9 +39,23 @@ namespace ProgrammingTask.NetPlayer
             _jumpControl.action.Disable();
         }
 
+        public void SetupPlayer()
+        {
+            _virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+            _virtualCamera.Follow = transform;
+            _virtualCamera.LookAt = transform;
+            _cameraMainTransform = Camera.main.transform;
+            
+            _movementControl.action.Enable();
+            _jumpControl.action.Enable();
+        }
+
         private void Update()
         {
-            if(!IsOwner)
+            if(!IsLocalPlayer)
+                return;
+            
+            if(_cameraMainTransform == null)
                 return;
             
             _groundedPlayer = _controller.isGrounded;
@@ -69,14 +63,14 @@ namespace ProgrammingTask.NetPlayer
             {
                 _playerVelocity.y = 0f;
             }
-
+            
             Vector2 movement = _movementControl.action.ReadValue<Vector2>();
             Vector3 move = new Vector3(movement.x, 0, movement.y);
             move = _cameraMainTransform.forward * move.z + _cameraMainTransform.right * move.x;
             move.y = 0f;
             
             _controller.Move(move * (Time.deltaTime * _playerSpeed));
-
+            
             if (_jumpControl.action.triggered && _groundedPlayer)
             {
                 _playerVelocity.y += _gravityValue * Time.deltaTime;

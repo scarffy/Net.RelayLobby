@@ -8,48 +8,58 @@ namespace ProgrammingTask
 {
     public class PlayerHandler : NetworkBehaviour
     {
-        [SerializeField] private int _playerChosenPosition;
-
         [SerializeField] private PlayerMovement _playerMovement;
         
         public override void OnNetworkSpawn()
         {
-            if(!IsOwner)
-                return;
-            base.OnNetworkSpawn();
-
-            ConnectionApprovalHandler approvalHandler = FindObjectOfType<ConnectionApprovalHandler>();
             NetworkManager.Singleton.SceneManager.OnSceneEvent += OnSceneEvent;
-            
-            if (approvalHandler.playerDatas.TryGetValue(approvalHandler.GetPlayerName, out PlayerData data))
-            {
-                _playerChosenPosition = data.buttonChosen;
-            }
         }
-
+        
         private void OnSceneEvent(SceneEvent sceneEvent)
         {
-            if (!IsOwner)
-                return;
-            
+            //! This run completely on server side
             if (sceneEvent.SceneName == "Game" && sceneEvent.SceneEventType == SceneEventType.LoadComplete)
             {
+                Debug.Log("With scene event");
                 StartCoroutine(MovePlayerToSpawnPosition());
-                _playerMovement.SetupPlayer();
+                StartCoroutine(SetupPlayer());
             }
         }
 
+        //! For some reason I couldn't make it move to spawn desired. I give up. 
         private IEnumerator MovePlayerToSpawnPosition()
         {
             yield return new WaitUntil(() => SpawnManager.Instance != null);
-            MoveToSpawnPosition_ServerRpc();
+            
+            MoveToSpawnPosition_ClientRpc();
         }
 
-
-        [ServerRpc]
-        public void MoveToSpawnPosition_ServerRpc()
+        [ClientRpc]
+        public void MoveToSpawnPosition_ClientRpc()
         {
-            transform.position = SpawnManager.Instance.GetSpawnPosition(_playerChosenPosition);
+            if(!IsLocalPlayer)
+                return;
+            
+            ConnectionApprovalHandler approvalHandler = FindObjectOfType<ConnectionApprovalHandler>();
+            int index = approvalHandler.GetPlayerIndex;
+            
+            transform.position = SpawnManager.Instance.GetSpawnPosition(index);
+            Debug.Log("Moving player to random position");
+        }
+
+        //! For some weird reason, this work fine
+        private IEnumerator SetupPlayer()
+        {
+            yield return new WaitUntil(() => SpawnManager.Instance != null);
+            SetupPlayer_ClientRpc();
+            Debug.Log("Setup player");
+        }
+
+        [ClientRpc]
+        private void SetupPlayer_ClientRpc()
+        {
+            if(IsLocalPlayer)
+                _playerMovement.SetupPlayer();
         }
     }
 }
