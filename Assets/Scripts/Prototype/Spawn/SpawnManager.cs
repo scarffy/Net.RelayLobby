@@ -7,14 +7,15 @@ using UnityEngine;
 
 namespace ProgrammingTask
 {
+    /// <summary>
+    /// Player handler get desired spawn position
+    /// </summary>
     public class SpawnManager : NetworkBehaviour
     {
         public static SpawnManager Instance;
         
         [SerializeField] 
         private SpawnPoints[] _spawnPointsArray = Array.Empty<SpawnPoints>();
-
-        [SerializeField] private ConnectionApprovalHandler _approvalHandler;
 
         private void Start()
         {

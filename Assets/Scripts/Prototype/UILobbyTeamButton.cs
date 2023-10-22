@@ -12,9 +12,9 @@ namespace ProgrammingTask
     {
         [SerializeField] private Button _teamButton;
         [SerializeField] private TextMeshProUGUI _teamButtonText;
-
+        
         [Header("Settings")] 
-        [SerializeField] private int _buttonIdex;
+        [SerializeField] private int _buttonIndex;
 
         private const string JOIN_TEAM = "Join Team";
 
@@ -49,7 +49,8 @@ namespace ProgrammingTask
             {
                 //! Handle success event
                 _isOccupied = true;
-                UILobbyTeam.Instance.SetCurrentOccupiedButton(_buttonIdex);
+                
+                UILobbyTeam.Instance.SetCurrentOccupiedButton(_buttonIndex);
             }
             else
             {
@@ -58,12 +59,7 @@ namespace ProgrammingTask
                 _teamButtonText.SetText(JOIN_TEAM);
             }
         }
-
-        public bool GetOccupied()
-        {
-            return _isOccupied;
-        }
-
+        
         public void SetOccupy(bool bIsOccupied)
         {
             _isOccupied = bIsOccupied;
@@ -73,7 +69,8 @@ namespace ProgrammingTask
             }
             else
             {
-                _teamButtonText.SetText("Join Team");
+                _teamButton.interactable = true;
+                _teamButtonText.SetText(JOIN_TEAM);
             }
         }
 
@@ -82,14 +79,16 @@ namespace ProgrammingTask
             _isOccupied = bIsOccupied;
             if (_isOccupied)
             {
+                _teamButton.interactable = false;
                 _teamButtonText.SetText(playerName);
             }
             else
             {
-                _teamButtonText.SetText("Join Team");
+                _teamButtonText.SetText(JOIN_TEAM);
             }
         }
 
-        public int ButtonIndex => _buttonIdex;
+        public int ButtonIndex => _buttonIndex;
+        public bool GetOccupied() => _isOccupied;
     }
 }

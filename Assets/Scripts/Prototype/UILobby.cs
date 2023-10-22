@@ -17,9 +17,14 @@ using UnityEngine.UI;
 
 namespace ProgrammingTask
 {
+    /// <summary>
+    /// Handling everything about lobby logic.
+    /// TODO: Change name to suite the functionality better
+    /// </summary>
     public class UILobby : MonoBehaviour
     {
-        [Header("UI-Panel")] [SerializeField] private GameObject _menuPanel;
+        [Header("UI-Panel")] 
+        [SerializeField] private GameObject _menuPanel;
         [SerializeField] private GameObject _lobbyPanel;
 
         [Header("UI-Button")] 
@@ -50,14 +55,15 @@ namespace ProgrammingTask
             _leaveLobbyButton.onClick.AddListener(LeaveLobby);
             _hostStartGameButton.onClick.AddListener(StartGame);
 
-            _playerName = "anon" + UnityEngine.Random.Range(10, 99);
+            _playerName = "anon" + UnityEngine.Random.Range(10, 500);
 
             await UnityServices.InitializeAsync();
-            Debug.Log(UnityServices.State);
+            Debug.Log($"[UnityService] {UnityServices.State}");
 
+            //! Get player sign in status
             AuthenticationService.Instance.SignedIn += () =>
             {
-                Debug.Log($"Signed in {AuthenticationService.Instance.PlayerId} {_playerName}");
+                Debug.Log($"[AuthenticationService] Signed in {AuthenticationService.Instance.PlayerId} {_playerName}");
             };
             
             //! User sign in as anon
@@ -70,6 +76,10 @@ namespace ProgrammingTask
             HandleLobbyUpdate();
         }
 
+        /// <summary>
+        /// Create Relay for Players to join the game scene
+        /// </summary>
+        /// <returns></returns>
         private async Task<string> CreateRelay()
         {
             try
@@ -93,6 +103,10 @@ namespace ProgrammingTask
             }
         }
 
+        /// <summary>
+        /// Join Relay for Players to join game scene
+        /// </summary>
+        /// <param name="joinCode"></param>
         private async void JoinRelay(string joinCode)
         {
             try
@@ -115,7 +129,7 @@ namespace ProgrammingTask
         }
         
         /// <summary>
-        /// To prevent lobby from deactivated
+        /// To prevent lobby from deactivated in order for player to search the lobby
         /// </summary>
         private async void HandleLobbyHeartbeat()
         {
@@ -133,7 +147,7 @@ namespace ProgrammingTask
         }
         
         /// <summary>
-        /// Handle anything regarding lobby's data
+        /// Handle anything regarding lobby's data updates
         /// </summary>
         private async void HandleLobbyUpdate()
         {
@@ -155,7 +169,6 @@ namespace ProgrammingTask
                         {
                             JoinRelay(_joinedLobby.Data["StartGame"].Value);
                         }
-
                         _joinedLobby = null;
                     }
                     
@@ -165,7 +178,11 @@ namespace ProgrammingTask
                 }
             }
         }
-
+        
+        /// <summary>
+        /// Update button states 
+        /// </summary>
+        /// <param name="lobby"></param>
         private void UpdateTeamButton(Lobby lobby)
         {
             foreach (Player player in lobby.Players)
@@ -174,11 +191,15 @@ namespace ProgrammingTask
             }
         }
 
+        /// <summary>
+        /// Update team list. Add player data is not exist
+        /// </summary>
+        /// <param name="lobby"></param>
         private void UpdateTeamList(Lobby lobby)
         {
             if (_approvalHandler.playerDatas.Count <= 0)
             {
-                Debug.Log("PlayerData Dict is empty");
+                Debug.Log("[UpdateTeamList] PlayerData Dict is empty");
                 return;
             }
             else
@@ -213,16 +234,20 @@ namespace ProgrammingTask
                     }
                 }
                 
-                foreach (var playerData in _approvalHandler.playerDatas)
-                {
-                    Debug.Log($"[PlayerData List Update]: Key:{playerData.Key} Name:{playerData.Value.playerName}" +
-                              $" LobbyId:{playerData.Value.playerLobbyId} TeamColor:{playerData.Value.ETeamColor}" +
-                              $" ButtonChose:{playerData.Value.buttonChosen} ClientId:{playerData.Value.clientId}");
-                }
+                //! TODO: Remove these or capsulate it in Logger function
+                // foreach (var playerData in _approvalHandler.playerDatas)
+                // {
+                //     Debug.Log($"[PlayerData List Update]: Key:{playerData.Key} Name:{playerData.Value.playerName}" +
+                //               $" LobbyId:{playerData.Value.playerLobbyId} TeamColor:{playerData.Value.ETeamColor}" +
+                //               $" ButtonChose:{playerData.Value.buttonChosen} ClientId:{playerData.Value.clientId}");
+                // }
             }
             
         }
 
+        /// <summary>
+        /// Create Lobby for host
+        /// </summary>
         private async void CreateLobby()
         {
             string lobbyName = "MyLobby";
@@ -255,6 +280,9 @@ namespace ProgrammingTask
             AddPlayerToDictionary(_joinedLobby);
         }
 
+        /// <summary>
+        /// List all lobbies that available but not needed in this project
+        /// </summary>
         private async void ListLobbies()
         {
             try
@@ -272,6 +300,10 @@ namespace ProgrammingTask
                 Debug.LogWarning(e);
             }
         }
+        
+        /// <summary>
+        /// Quick Join any available lobby
+        /// </summary>
         private async void QuickJoinLobby()
         {
             try
@@ -280,8 +312,6 @@ namespace ProgrammingTask
                 {
                     Player = GetPlayer()
                 };
-                
-                Player player = GetPlayer();
                 
                 Lobby joinedLobby = await Lobbies.Instance.QuickJoinLobbyAsync(quickJoinLobbyOptions);
                 
@@ -297,7 +327,7 @@ namespace ProgrammingTask
                 }
                 else
                 {
-                    Debug.Log("Failed to add player to dictionary. Data already existed");
+                    Debug.Log("[QuickJoinLobby] Failed to add player to dictionary. Data already existed");
                 }
 
                 _hostStartGameButton.gameObject.SetActive(false);
@@ -331,6 +361,10 @@ namespace ProgrammingTask
             };
         }
 
+        /// <summary>
+        /// Store player data to be update in lobby heartbeat
+        /// </summary>
+        /// <param name="lobby"></param>
         private void AddPlayerToDictionary(Lobby lobby)
         {
             foreach (Player player in lobby.Players)
@@ -352,21 +386,30 @@ namespace ProgrammingTask
             }
         }
 
+        /// <summary>
+        /// Debug log function for testing purposes.
+        /// TODO: Remove these or capsulate it in Logger function
+        /// </summary>
+        /// <param name="lobby"></param>
         private void PrintPlayers(Lobby lobby)
         {
-            foreach (Player player in lobby.Players)
-            {
-                Debug.Log($"{player.Id} {player.Data["PlayerName"].Value} {player.Data["TeamColor"].Value} {player.Data["OccupiedButton"].Value}");
-            }
+            // foreach (Player player in lobby.Players)
+            // {
+            //     Debug.Log($"{player.Id} {player.Data["PlayerName"].Value} {player.Data["TeamColor"].Value} {player.Data["OccupiedButton"].Value}");
+            // }
 
-            foreach (var playerData in _approvalHandler.playerDatas)
-            {
-                Debug.Log($"[PlayerData Print]: Key:{playerData.Key} Name:{playerData.Value.playerName}" +
-                          $" LobbyId:{playerData.Value.playerLobbyId} TeamColor:{playerData.Value.ETeamColor}" +
-                          $" ButtonChose:{playerData.Value.buttonChosen} ClientId:{playerData.Value.clientId}");
-            }
+            // foreach (var playerData in _approvalHandler.playerDatas)
+            // {
+            //     Debug.Log($"[PlayerData Print]: Key:{playerData.Key} Name:{playerData.Value.playerName}" +
+            //               $" LobbyId:{playerData.Value.playerLobbyId} TeamColor:{playerData.Value.ETeamColor}" +
+            //               $" ButtonChose:{playerData.Value.buttonChosen} ClientId:{playerData.Value.clientId}");
+            // }
         }
         
+        /// <summary>
+        /// Update player name
+        /// </summary>
+        /// <param name="newPlayerName"></param>
         private async void UpdatePlayerName(string newPlayerName)
         {
             _playerName = newPlayerName;
@@ -390,6 +433,11 @@ namespace ProgrammingTask
             }
         }
 
+        
+        /// <summary>
+        /// Update team list
+        /// </summary>
+        /// <param name="eTeamColor"></param>
         public async void UpdatePlayerTeam(ETeamColor eTeamColor)
         {
             try
@@ -452,6 +500,9 @@ namespace ProgrammingTask
             }
         }
 
+        /// <summary>
+        /// Basic leave lobby function
+        /// </summary>
         private async void LeaveLobby()
         {
             try
@@ -468,6 +519,9 @@ namespace ProgrammingTask
             }
         }
 
+        /// <summary>
+        /// Manually migrate lobby host.
+        /// </summary>
         private async void MigrateLobbyHost()
         {
             try
@@ -484,6 +538,10 @@ namespace ProgrammingTask
             }
         }
 
+        /// <summary>
+        /// UI panel handler
+        /// </summary>
+        /// <param name="lobbyMode"></param>
         private void SetLobbyMode(LobbyMode lobbyMode)
         {
             switch (lobbyMode)
@@ -504,6 +562,9 @@ namespace ProgrammingTask
             }
         }
 
+        /// <summary>
+        /// Host to start game function
+        /// </summary>
         private async void StartGame()
         {
             if (_isHost)

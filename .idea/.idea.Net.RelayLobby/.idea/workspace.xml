@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8bbc986b-ae66-4617-a5b7-4609c215ceda" name="Changes" comment="" />
+    <list default="true" id="8bbc986b-ae66-4617-a5b7-4609c215ceda" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Net.RelayLobby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Net.RelayLobby/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/MainMenu.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Prototype/ConnectionApprovalHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Prototype/ConnectionApprovalHandler.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Prototype/Spawn/SpawnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Prototype/Spawn/SpawnManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Prototype/UILobby.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Prototype/UILobby.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Prototype/UILobbyTeam.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Prototype/UILobbyTeam.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Prototype/UILobbyTeamButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Prototype/UILobbyTeamButton.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,10 +21,13 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/23/e9a983db/DataMemberAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/87f070167a7643108cc61ef0492f958c1fe00/bd/10b7e02d/CharacterController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Prototype/ConnectionApprovalHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Prototype/Player/PlayerHandler.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Prototype/SceneHandler.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Prototype/Spawn/SpawnPoints.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://E:/Unity Project/StreamLine/Gundam Metaverse/packages/game/G/Assets/_Project/Scripts/Avatars/AvatarManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://E:/Unity Project/StreamLine/Gundam Metaverse/packages/game/G/Assets/_Project/Scripts/Avatars/Components/AvatarObject.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://E:/Unity Project/StreamLine/Gundam Metaverse/packages/game/G/Assets/_Project/Scripts/Avatars/Components/AvatarSynchronizer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://E:/Unity Project/StreamLine/Gundam Metaverse/packages/game/G/Assets/_Project/Scripts/Core/CoreAnchor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://E:/Unity Project/StreamLine/Gundam Metaverse/packages/game/G/Assets/_Project/Scripts/Shell/Pipelines/CommandPipeline.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://E:/Unity Project/StreamLine/Gundam Metaverse/packages/game/G/Assets/_Project/Scripts/Shell/Pipelines/EventPipeline.cs" root0="SKIP_HIGHLIGHTING" />
@@ -101,7 +113,8 @@
       <option name="presentableId" value="Default" />
       <updated>1697946045755</updated>
       <workItem from="1697946047032" duration="17779000" />
-      <workItem from="1697993034992" duration="484000" />
+      <workItem from="1697993034992" duration="3717000" />
+      <workItem from="1698000301530" duration="3200000" />
     </task>
     <servers />
   </component>

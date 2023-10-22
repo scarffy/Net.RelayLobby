@@ -8,21 +8,29 @@ using Random = UnityEngine.Random;
 
 namespace ProgrammingTask
 {
+    /// <summary>
+    /// This carry forward to next scene as PlayerHandler will use some of the value here
+    /// </summary>
     public class ConnectionApprovalHandler : MonoBehaviour
     {
         private int MaxPlayers = 10;
-
+        
+        /// <summary>
+        /// Data stored for Lobby
+        /// </summary>
         public Dictionary<string, PlayerData> playerDatas = new Dictionary<string, PlayerData>();
 
-        [Space]
+        [Header("Local player data")]
+        //! Currently not syncing data across network
         [SerializeField] private string _playerName = "";
-
         [SerializeField] private int _playerIndex = -1;
         
         private void Start()
         {
             NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
 
+            //! Maybe if have time in future, to refactor this using delegate action instead
+            //! While loop might crash
             while (_playerName == "")
             {
                 UILobby lobby = FindObjectOfType<UILobby>();
@@ -30,6 +38,8 @@ namespace ProgrammingTask
             }
         }
 
+        //! For some reason, CreatePlayerObject spawn player in previous scene instead of new 'Game' scene
+        //! Hence, doing workaround with PlayerHandler
         private void ApprovalCheck(NetworkManager.ConnectionApprovalRequest request,
             NetworkManager.ConnectionApprovalResponse response)
         {
@@ -43,6 +53,7 @@ namespace ProgrammingTask
                 response.Reason = "Server is Full";
             }
 
+            //! Probably better to use delegate action instead
             if(playerDatas.ContainsKey(_playerName))
             {
                 if (playerDatas.TryGetValue(_playerName, out PlayerData data))
@@ -54,9 +65,7 @@ namespace ProgrammingTask
             
             response.Pending = false;
         }
-
-
-        public string GetPlayerName => _playerName;
+        
         public int GetPlayerIndex => _playerIndex;
         public int SetPlayerIndex(int index) => _playerIndex = index;
     }

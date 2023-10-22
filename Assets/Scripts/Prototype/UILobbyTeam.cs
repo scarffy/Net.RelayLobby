@@ -51,42 +51,39 @@ namespace  ProgrammingTask
         }
 
         /// <summary>
-        /// TODO: Get Team Color as well
+        /// Refresh all occupied buttons
         /// </summary>
         /// <param name="playerList"></param>
         public void UpdateCurrentOccupiedButtons(List<Unity.Services.Lobbies.Models.Player> playerList)
         {
             if (playerList.Count <= 0)
                 return;
-
             
+            //! Set initial state to false
+            foreach (var t in _teamButtonsList)
+            {
+                t.SetOccupy(false);
+            }
+            
+            //! Set the state to current state
             foreach (Unity.Services.Lobbies.Models.Player player in playerList)
             {
-               if (_teamButtonsList.Length <= 0)
+                if (_teamButtonsList.Length <= 0)
                      return;
-                 
-                 foreach (var t in _teamButtonsList)
-                 {
-                     t.SetOccupy(false);
-                 }
                 
-                foreach (var _player in playerList)
-                {
-                    teamColor = _player.Data["TeamColor"].Value;
-                    eTeamColor = (UILobby.ETeamColor)Enum.Parse(typeof(UILobby.ETeamColor),teamColor);
-                    occupiedButton = _player.Data["OccupiedButton"].Value;
-                    occupiedButtonIndex = int.Parse(occupiedButton);
+                teamColor = player.Data["TeamColor"].Value;
+                eTeamColor = (UILobby.ETeamColor)Enum.Parse(typeof(UILobby.ETeamColor),teamColor);
+                occupiedButton = player.Data["OccupiedButton"].Value;
+                occupiedButtonIndex = int.Parse(occupiedButton);
 
-                    foreach (var e in _teamButtonsList)
+                foreach (var e in _teamButtonsList)
+                {
+                    if (e.ButtonIndex == occupiedButtonIndex)
                     {
-                        if (e.ButtonIndex == occupiedButtonIndex)
+                        if (e.eTeamColour == eTeamColor)
                         {
-                            if (e.eTeamColour == eTeamColor)
-                            {
-                                e.SetOccupy(true, _player.Data["PlayerName"].Value);
-                            }
+                            e.SetOccupy(true, player.Data["PlayerName"].Value);
                         }
-                            
                     }
                 }
             }

@@ -514,7 +514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamButton: {fileID: 0}
   _teamButtonText: {fileID: 0}
-  _buttonIdex: 8
+  _buttonIndex: 8
   eTeamColour: 1
 --- !u!1 &328833523
 GameObject:
@@ -773,7 +773,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamButton: {fileID: 0}
   _teamButtonText: {fileID: 0}
-  _buttonIdex: 4
+  _buttonIndex: 4
   eTeamColour: 0
 --- !u!1 &433685921
 GameObject:
@@ -1445,7 +1445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamButton: {fileID: 0}
   _teamButtonText: {fileID: 0}
-  _buttonIdex: 5
+  _buttonIndex: 5
   eTeamColour: 0
 --- !u!1 &705507993
 GameObject:
@@ -1945,7 +1945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamButton: {fileID: 0}
   _teamButtonText: {fileID: 0}
-  _buttonIdex: 7
+  _buttonIndex: 7
   eTeamColour: 1
 --- !u!1 &963194225
 GameObject:
@@ -2175,7 +2175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamButton: {fileID: 0}
   _teamButtonText: {fileID: 0}
-  _buttonIdex: 2
+  _buttonIndex: 1
   eTeamColour: 0
 --- !u!1 &1042751323
 GameObject:
@@ -2524,7 +2524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamButton: {fileID: 0}
   _teamButtonText: {fileID: 0}
-  _buttonIdex: 9
+  _buttonIndex: 9
   eTeamColour: 1
 --- !u!1 &1104767962
 GameObject:
@@ -2732,7 +2732,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamButton: {fileID: 0}
   _teamButtonText: {fileID: 0}
-  _buttonIdex: 6
+  _buttonIndex: 6
   eTeamColour: 1
 --- !u!1 &1151743777
 GameObject:
@@ -2938,7 +2938,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamButton: {fileID: 0}
   _teamButtonText: {fileID: 0}
-  _buttonIdex: 1
+  _buttonIndex: 0
   eTeamColour: 0
 --- !u!1 &1196278639
 GameObject:
@@ -4455,7 +4455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamButton: {fileID: 0}
   _teamButtonText: {fileID: 0}
-  _buttonIdex: 10
+  _buttonIndex: 10
   eTeamColour: 1
 --- !u!1 &1774280031
 GameObject:
@@ -4727,7 +4727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _teamButton: {fileID: 0}
   _teamButtonText: {fileID: 0}
-  _buttonIdex: 3
+  _buttonIndex: 2
   eTeamColour: 0
 --- !u!1 &1862756199
 GameObject:

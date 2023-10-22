@@ -515,7 +515,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394352267}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.23341003, y: -0.0000000068818453, z: 0.0000000051289177, w: 0.97237843}
+  m_LocalRotation: {x: -0.23341003, y: -0.000000006898146, z: 0.0000000051410662, w: 0.97237843}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2048,7 +2048,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnPointsArray: []
-  _approvalHandler: {fileID: 0}
 --- !u!4 &1914367202
 Transform:
   m_ObjectHideFlags: 0
