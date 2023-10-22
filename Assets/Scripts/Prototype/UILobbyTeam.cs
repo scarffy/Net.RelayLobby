@@ -88,7 +88,5 @@ namespace  ProgrammingTask
                 }
             }
         }
-        
-        public int GetCurrentOccupiedButton() => _currentlyOccupied;
     }
 }

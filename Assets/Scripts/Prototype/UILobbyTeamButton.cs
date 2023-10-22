@@ -8,6 +8,9 @@ using UnityEngine.UI;
 
 namespace ProgrammingTask
 {
+    /// <summary>
+    /// Team Button logic
+    /// </summary>
     public class UILobbyTeamButton : MonoBehaviour
     {
         [SerializeField] private Button _teamButton;
@@ -40,16 +43,19 @@ namespace ProgrammingTask
             if(GetOccupied())
                 return;
 
-            UILobbyTeam.Instance.ChooseTeam(eTeamColour,eventCallback);
+            UILobbyTeam.Instance.ChooseTeam(eTeamColour,EventCallback);
         }
 
-        private void eventCallback(bool isSuccess)
+        /// <summary>
+        /// Event callback for choose team result
+        /// </summary>
+        /// <param name="isSuccess"></param>
+        private void EventCallback(bool isSuccess)
         {
             if (isSuccess)
             {
                 //! Handle success event
                 _isOccupied = true;
-                
                 UILobbyTeam.Instance.SetCurrentOccupiedButton(_buttonIndex);
             }
             else
