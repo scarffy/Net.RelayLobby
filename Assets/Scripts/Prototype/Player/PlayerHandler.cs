@@ -15,7 +15,7 @@ namespace ProgrammingTask
         
         public override void OnNetworkSpawn()
         {
-            //! Subcribe to load scene event
+            //! Subscribe to load scene event
             NetworkManager.Singleton.SceneManager.OnSceneEvent += OnSceneEvent;
         }
         
