@@ -2538,7 +2538,7 @@ GameObject:
   - component: {fileID: 1104767963}
   - component: {fileID: 1104767965}
   m_Layer: 0
-  m_Name: Scripts
+  m_Name: UILobby
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5317,6 +5317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e956a28e26fbee94c8e76aa04928ee95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerName: 
 --- !u!1 &2146864149
 GameObject:
   m_ObjectHideFlags: 0

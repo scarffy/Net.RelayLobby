@@ -14,7 +14,8 @@ namespace  ProgrammingTask
         [SerializeField] private UILobby _uiLobby;
 
         [Header("UI-Team Button")] 
-        [SerializeField] private UILobbyTeamButton[] _teamButtonsList = Array.Empty<UILobbyTeamButton>();
+        [SerializeField] 
+        private UILobbyTeamButton[] _teamButtonsList = Array.Empty<UILobbyTeamButton>();
         private UILobbyTeamButton teamButton;
 
         [Space] 

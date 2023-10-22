@@ -286,8 +286,7 @@ namespace ProgrammingTask
                 SetLobbyMode(LobbyMode.lobby);
                 
                 PrintPlayers(joinedLobby);
-
-                Debug.Log("Someone joined lobby");
+                
                 if (!_approvalHandler.playerDatas.ContainsKey(_playerName))
                 {
                     AddPlayerToDictionary(joinedLobby);
@@ -332,12 +331,19 @@ namespace ProgrammingTask
         {
             foreach (Player player in lobby.Players)
             {
-                if (_approvalHandler.playerDatas.TryGetValue(player.Data["PlayerName"].Value, out var data))
+                PlayerData data = new PlayerData();
+                data.ETeamColor = (ETeamColor)Enum.Parse(typeof(ETeamColor),player.Data["TeamColor"].Value);
+                data.buttonChosen = int.Parse(player.Data["OccupiedButton"].Value);
+                data.playerName = player.Data["PlayerName"].Value;
+                data.playerLobbyId = player.Id;
+                
+                if(_approvalHandler.playerDatas.TryAdd(player.Data["PlayerName"].Value,data))
                 {
-                    data.ETeamColor = (ETeamColor)Enum.Parse(typeof(ETeamColor),player.Data["TeamColor"].Value);
-                    data.buttonChosen = int.Parse(player.Data["OccupiedButton"].Value);
-                    data.playerName = player.Data["PlayerName"].Value;
-                    data.playerLobbyId = player.Id;
+                    Debug.Log($"[AddPlayerToDictionary] New player {player.Data["PlayerName"].Value} added");
+                }
+                else
+                {
+                    Debug.Log("[AddPlayerToDictionary] Player data has existed");
                 }
             }
         }
@@ -403,8 +409,7 @@ namespace ProgrammingTask
                 _joinedLobby = lobby;
                 
                  PrintPlayers(lobby);
-                 Debug.Log(AuthenticationService.Instance.PlayerId);
-                
+
             }
             catch (Exception e)
             {
